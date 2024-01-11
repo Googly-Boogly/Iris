@@ -94,7 +94,7 @@ class Habits_class:
 
     @staticmethod
     @log_exceptions
-    def add_completed_habit(habit_id: int) -> str | bool | None:
+    def add_completed_habit(habit_id: int) -> str or bool or None:
         """
         adds a completed habit to the database
         :param habit_id: (int)

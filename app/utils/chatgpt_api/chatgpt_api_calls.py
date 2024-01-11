@@ -71,7 +71,7 @@ def call_api_function_call(message: str) -> openai:
 
 
 # @log_exceptions
-def call_gpt(input_text: str, global_variables: list | None = None) -> None:
+def call_gpt(input_text: str, global_variables: list or None = None) -> None:
     """
     This function will call the GPT-3 API and return the response
     Using any functions you provide and decide to call a function or return a nromal gpt response

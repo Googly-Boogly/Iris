@@ -2,8 +2,7 @@
 #  Status: response is too long
 #****************************************************#
 
-import googlemaps
-from geopy.distance import geodesic
+
 from app.global_code.helpful_functions import create_logger_error, log_it, log_exceptions, benchmark_and_log_exceptions
 import os
 from app.global_code.secrets import google_maps_api_key
@@ -26,28 +25,7 @@ def get_restaurants_in_area(latitude: float, longitude: float, radius: int) -> l
     :return:
     """
     # Initialize the Google Maps client with your API key
-    gmaps = googlemaps.Client(key=google_maps_api_key())
 
-    places = gmaps.places_nearby(location=(latitude, longitude), radius=radius, type='restaurant')
-
-    restaurants = []
-
-    for place in places['results']:
-        name = place['name']
-        address = place['vicinity']
-        distance = geodesic((latitude, longitude),
-                            (place['geometry']['location']['lat'], place['geometry']['location']['lng'])).miles
-        rating = place.get('rating', 0)
-
-        restaurant = {
-            'name': name,
-            'address': address,
-            'distance': distance,
-            'rating': rating
-        }
-        restaurants.append(restaurant)
-
-    return restaurants
 
 if __name__ == '__main__':
     x = get_restaurants_in_area(37.7749, -122.4194, 5000)

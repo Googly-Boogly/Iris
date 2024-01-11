@@ -3,7 +3,7 @@ import sounddevice as sd
 from app.global_code.helpful_functions import create_logger_error, log_it, benchmark_and_log_exceptions
 from app.utils.j_settings import Settings
 
-def get_output_device_index(device_name: str | None) -> int | None:
+def get_output_device_index(device_name: str or None) -> int or None:
     devices = sd.query_devices()
     for i, device in enumerate(devices):
         if device['name'] == device_name:
@@ -12,7 +12,7 @@ def get_output_device_index(device_name: str | None) -> int | None:
 
 
 @benchmark_and_log_exceptions
-def speak(text: str, device_name: str | None = None, settings: Settings | None = None) -> str:
+def speak(text: str, device_name: str or None = None, settings: Settings or None = None) -> str:
     """
     This will be redesigned to create mp3 files, playing them will be up to the device
     Speaks the text

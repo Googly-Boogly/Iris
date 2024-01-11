@@ -1,4 +1,3 @@
-from app.utils.speech_input_loop import main
 from app.utils.chatgpt_api.chatgpt_api_calls import call_gpt
 import asyncio
 from app.database_scanner.loop import run_database_loop_asynchronous

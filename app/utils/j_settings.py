@@ -9,10 +9,10 @@ class Settings:
     """
     def __init__(self, current_latitude: float, current_longitude: float, current_city: str,
                  current_state: str, current_country: str, current_zipcode: int,
-                 current_timezone: str, user: User, directory_for_mp3: str | None = None,
-                 username_async_thread_decrypted: str | None = None,
-                 password_async_thread_decrypted: str | None = None, username_api_decrypted: str | None = None,
-                 password_api_decrypted: str | None = None, websocket_url: str | None = None):
+                 current_timezone: str, user: User, directory_for_mp3: str or None = None,
+                 username_async_thread_decrypted: str or None = None,
+                 password_async_thread_decrypted: str or None = None, username_api_decrypted: str or None = None,
+                 password_api_decrypted: str or None = None, websocket_url: str or None = None):
         """
         All settings for the user
         :param current_latitude: current latitude of the user

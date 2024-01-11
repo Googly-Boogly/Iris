@@ -7,7 +7,7 @@ import time
 # This will be a universal page, for use across multiple projects
 
 
-def log_exceptions(file_prefix: str | None = None):
+def log_exceptions(file_prefix: str or None = None):
     """
         Wraps code in try Except and logs it.
         Lets through custom errors (same file) and lets them continue up the stack
@@ -42,7 +42,7 @@ def log_exceptions(file_prefix: str | None = None):
     return decorator
 
 
-def benchmark_function(file_prefix: str | None = None):
+def benchmark_function(file_prefix: str or None = None):
     """
     Benchmarks your function, and creates a benchmark log file
     :param file_prefix: if you want to add a suffix to the function name
@@ -77,7 +77,7 @@ def benchmark_function(file_prefix: str | None = None):
     return decorator
 
 
-def benchmark_and_log_exceptions(file_prefix: str | None = None):
+def benchmark_and_log_exceptions(file_prefix: str or None = None):
     """
         Benchmarks your function
         To use: from helpful_functions import benchmark_logs
