@@ -1,0 +1,11 @@
+# First off fuck gitignore in general
+#
+#
+#
+venv/
+*.log
+__pycache__/
+data/
+secrets.py
+.idea/
+sql_master_key.txt
