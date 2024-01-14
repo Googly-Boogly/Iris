@@ -1,0 +1,32 @@
+
+Websocket server for a virtual assistant
+launches two threads: A websocket api thread, and a thread to send the queue to other programs
+
+To Do
+
+Installation:
+    Python 3.9
+    create a venv with this command:
+    ```bash
+    python3 -m venv venv
+    ```
+    activate the venv with this command:
+    ```bash
+    source venv/bin/activate
+    ```
+    install the requirements with this command:
+    ```bash
+    pip install -r requirements.txt
+    ```
+    run the server with this command:
+    ```bash
+    python3 main.py
+    ```
+        Or
+            Install Docker
+    navigate to base dir of the project run
+        ```bash
+        docker build -t your-name .
+        ```
+
+

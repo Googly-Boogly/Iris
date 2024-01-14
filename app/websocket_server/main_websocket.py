@@ -20,10 +20,8 @@ async def main_loop(settings: Settings):
         async with websockets.connect(url) as ws:
             authenticated = False
             while not authenticated:
-                print('hi1')
                 username = settings.username_async_thread_decrypted
                 authenticated = await authenticate(ws, settings)
-                print(f"AUTHEICATIONB: {authenticated}")
             await interact_with_main_server(ws, username)
     except websockets.exceptions.ConnectionClosed as e:
         logger = create_logger_error(os.path.abspath(__file__), 'main_loop', log_to_console=True)

@@ -38,9 +38,9 @@ def validate_data(data):
     assert 'sender_id' in data
     assert 'sending_location' in data
     assert 'function_call' in data
-    assert isinstance(['sender_id'], str)
-    assert isinstance(['sending_location'], str)
-    assert isinstance(['function_call'], str)
+    assert isinstance(data['sender_id'], list)
+    assert isinstance(data['sending_location'], list)
+    assert isinstance(data['function_call'], str)
 
 
 def validate_is_audio_data(data):
@@ -63,11 +63,11 @@ def validata_take_command_data(data):
     assert 'data' in data
     assert 'function_call' in data['data']
     assert 'arguments' in data['data']
-    assert 'what_was_said' in data['data']['arguments']
-    assert isinstance(data['data']['arguments']['what_was_said'], str)
+    assert 'what_was_said' in data['data']
 
 
-def test_data():
+
+def test_data(temp: str) -> dict:
     data = {
         'sender_id': 'main_server',
         'sending_location': 'phone',

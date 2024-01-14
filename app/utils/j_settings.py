@@ -1,5 +1,6 @@
 from app.utils.user_classes import User
 import os
+from typing import Optional
 
 
 class Settings:
@@ -9,10 +10,10 @@ class Settings:
     """
     def __init__(self, current_latitude: float, current_longitude: float, current_city: str,
                  current_state: str, current_country: str, current_zipcode: int,
-                 current_timezone: str, user: User, directory_for_mp3: str or None = None,
-                 username_async_thread_decrypted: str or None = None,
-                 password_async_thread_decrypted: str or None = None, username_api_decrypted: str or None = None,
-                 password_api_decrypted: str or None = None, websocket_url: str or None = None):
+                 current_timezone: str, user: User, directory_for_mp3: Optional[str] = None,
+                 username_async_thread_decrypted: Optional[str] = None,
+                 password_async_thread_decrypted: Optional[str] = None, username_api_decrypted: Optional[str] = None,
+                 password_api_decrypted: Optional[str] = None, websocket_url: Optional[str] = None):
         """
         All settings for the user
         :param current_latitude: current latitude of the user
@@ -51,3 +52,19 @@ class Settings:
         self.username_api_decrypted = username_api_decrypted if username_api_decrypted else 'api_server'
         self.password_api_decrypted = password_api_decrypted if password_api_decrypted else 'API_SERVER_PASSWORD123#'
         self.websocket_url = websocket_url if websocket_url else 'ws://localhost:7890'
+
+def get_current_details_test():
+    user = User(
+        {'id': 1, 'first_name': 'test', 'last_name': 'test',
+         'middle_name': 'test', 'added': 'test', 'updated': 'test',
+         'email': 'test', 'phone_number': 'test', 'password': 'test'}
+    )
+    setting = Settings(current_latitude=0, current_longitude=0,
+                       current_city='test', current_state='test', current_country='test',
+                       current_zipcode=55446, current_timezone='test',
+                       user=user)
+    return setting
+
+
+if __name__ == '__main__':
+    pass
