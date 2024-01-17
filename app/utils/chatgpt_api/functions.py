@@ -1,7 +1,11 @@
 import unittest
 
 
-def get_list_of_functions():
+def get_list_of_functions() -> list[dict]:
+    """
+    Unit test to make sure all the functions are valid
+    :return: a list of all the functions available to the user
+    """
     total_functions = list_of_functions()
     validate_total_functions(total_functions)
     return total_functions
@@ -86,7 +90,7 @@ def list_of_functions() -> list[dict]:
     """
     This function will return a list of all the functions that are available to the user
     These functions will be given to the gpt to decide if it needs to be called or not
-    :return: a list of dictonaries of all the functions
+    :return: a list of dicts of all the functions
     """
     function_create_event = {
             "name": 'create_event',
@@ -208,7 +212,7 @@ def list_of_functions() -> list[dict]:
         }
     function_get_restaurants_in_area = {
         "name": 'get_restaurants_in_area',
-        "description": 'create a calendar event',
+        "description": 'get a list of nearby restaurants',
         "parameters": {
             "type": 'object',
             'properties': {

@@ -2,8 +2,9 @@ import pyttsx3
 import sounddevice as sd
 from app.global_code.helpful_functions import create_logger_error, log_it, benchmark_and_log_exceptions
 from app.utils.j_settings import Settings
+from typing import Optional
 
-def get_output_device_index(device_name: str or None) -> int or None:
+def get_output_device_index(device_name: Optional[str]) -> int or None:
     devices = sd.query_devices()
     for i, device in enumerate(devices):
         if device['name'] == device_name:
@@ -12,15 +13,16 @@ def get_output_device_index(device_name: str or None) -> int or None:
 
 
 @benchmark_and_log_exceptions
-def speak(text: str, device_name: str or None = None, settings: Settings or None = None) -> str:
+def speak(text: str, device_name: Optional[str] = None, settings: Optional[Settings] = None) -> str:
     """
     This will be redesigned to create mp3 files, playing them will be up to the device
     Speaks the text
+    :param device_name:
     :param text: the text to speak
     :return: mp3 file directory
     """
     engine = pyttsx3.init()
-    output_device_index: int | None = get_output_device_index(device_name)
+    output_device_index: int or None = get_output_device_index(device_name)
     print(output_device_index)
     if output_device_index is not None:
         engine.setProperty('driverName', 'sounddevice')

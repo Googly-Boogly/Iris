@@ -17,6 +17,11 @@ from app.global_code.secrets import openai_api_key
 from app.global_code.global_vars import get_current_details
 import os
 
+"""
+
+This whole page needs to go and be replaced with a better system
+
+"""
 
 def create_api_key():
     api_key = openai_api_key()
