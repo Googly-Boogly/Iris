@@ -1,13 +1,13 @@
 import websockets
 import asyncio
-from app.key.keys import encrypt_message, decrypt_message
-from app.websocket_server.testing_data import validate_data, validate_is_audio_data, test_data, test_data2, \
+from key.keys import encrypt_message, decrypt_message
+from websocket_server.testing_data import validate_data, validate_is_audio_data, test_data, test_data2, \
     validata_take_command_data
-from app.utils.j_settings import Settings
-from app.global_code.helpful_functions import create_logger_error, log_it, CustomError
-from app.websocket_server.database_scanner_websocket import check_database
+from utils.j_settings import Settings
+from global_code.helpful_functions import create_logger_error, log_it, CustomError
+from websocket_server.database_scanner_websocket import check_database
 import os
-from app.global_code.global_vars import get_current_details
+from global_code.global_vars import get_current_details
 
 
 async def main_loop(settings: Settings):

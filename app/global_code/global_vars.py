@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from app.utils.j_settings import Settings
-from app.utils.user_classes import User
+from utils.j_settings import Settings
+from utils.user_classes import User
 
 
 def get_current_details() -> Settings:

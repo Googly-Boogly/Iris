@@ -1,13 +1,14 @@
-from app.utils.chatgpt_api.chatgpt_api_calls import call_gpt
+from utils.chatgpt_api.chatgpt_api_calls import call_gpt
 import asyncio
-from app.database_scanner.loop import run_database_loop_asynchronous
-from app.websocket_server.main_websocket import main_loop
-from app.global_code.helpful_functions import log_exceptions, benchmark_function,\
+from database_scanner.loop import run_database_loop_asynchronous
+from websocket_server.main_websocket import main_loop
+from global_code.helpful_functions import log_exceptions, benchmark_function,\
     benchmark_and_log_exceptions, count_lines_of_code
-from app.utils.j_settings import Settings
-from app.utils.user_classes import User
-from app.api.main_websocket_api import main_loop_api
+from utils.j_settings import Settings, get_current_details_test
+from utils.user_classes import User
+from api.main_websocket_api import main_loop_api
 from datetime import datetime
+import time
 
 
 if __name__ == "__main__":
@@ -15,8 +16,11 @@ if __name__ == "__main__":
     This will create 2 async threads that will run the main loop of the server, one will scan the database and the other
     will server as an api for the chatbot
     """
-    # print(count_lines_of_code(r'F:\Coding\Iris_V2\app'))
-    user_data = User.select_one(1)
+   
+    time.sleep(10)
+    
+    user_data = User.select_one(2)
+    print(user_data)
     user_data = user_data[0]
 
     user = User(

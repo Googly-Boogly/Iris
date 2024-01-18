@@ -7,14 +7,14 @@
 #  Requirements:
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++#
 import openai
-from app.global_code.helpful_functions import create_logger_error, log_it, log_exceptions,\
+from global_code.helpful_functions import create_logger_error, log_it, log_exceptions,\
     benchmark_and_log_exceptions, benchmark_function
 import json
-from app.utils.function_caller import call_function
-from app.utils.voice_output import speak
-from app.utils.chatgpt_api.functions import get_list_of_functions
-from app.global_code.secrets import openai_api_key
-from app.global_code.global_vars import get_current_details
+from utils.function_caller import call_function
+from utils.voice_output import speak
+from utils.chatgpt_api.functions import get_list_of_functions
+from global_code.secrets import openai_api_key
+from global_code.global_vars import get_current_details
 import os
 
 """

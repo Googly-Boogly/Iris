@@ -1,11 +1,18 @@
 FROM python:3.9-slim
 
+RUN apt-get update -y && apt-get upgrade -y
 
-WORKDIR /code
+WORKDIR /app
 
 COPY ./requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools
+RUN pip install openai
+RUN pip install -r requirements.txt
+RUN pip install pymysql
+RUN pip install python-dotenv
 
-COPY ./app /app
 
-CMD ["python", "./code/main.py"]
+
+
+CMD ["python", "main.py"]

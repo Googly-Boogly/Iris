@@ -1,4 +1,4 @@
-from app.utils.user_classes import User
+from utils.user_classes import User
 import os
 from typing import Optional
 
@@ -41,7 +41,7 @@ class Settings:
         self.current_zipcode = current_zipcode
         self.current_timezone = current_timezone
         self.user = user
-        self.ip = ip if ip else os.getenv('IP')
+        self.ip = ip if ip else os.getenv('IP_ADDR')
         self.port = port if port else os.getenv('PORT')
         self.directory_for_mp3 = directory_for_mp3 if directory_for_mp3 \
             else os.path.dirname(__file__) + '/mp3_file_download/'

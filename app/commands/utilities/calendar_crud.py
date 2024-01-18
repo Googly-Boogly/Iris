@@ -17,8 +17,8 @@ from datetime import datetime, timedelta, time, date
 # from pytz import timezone
 # from google.oauth2 import service_account
 # from googleapiclient.discovery import build
-from app.global_code.helpful_functions import create_logger_error, log_it, log_exceptions, CustomError
-from app.global_code.secrets import create_calendar_id_google
+from global_code.helpful_functions import create_logger_error, log_it, log_exceptions, CustomError
+from global_code.secrets import create_calendar_id_google
 import os
 
 

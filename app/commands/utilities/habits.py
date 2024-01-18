@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
-from app.commands.utilities.classes_utilities import habit, completed_habit
-from app.global_code.helpful_functions import create_logger_error, log_it, log_exceptions
+from commands.utilities.classes_utilities import habit, completed_habit
+from global_code.helpful_functions import create_logger_error, log_it, log_exceptions
 import os
 
 

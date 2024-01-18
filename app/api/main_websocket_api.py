@@ -2,13 +2,13 @@ import json
 
 import websockets
 import asyncio
-from app.key.keys import encrypt_message, decrypt_message
-from app.websocket_server.testing_data import validate_data, validate_is_audio_data, test_data, test_data2, \
+from key.keys import encrypt_message, decrypt_message
+from websocket_server.testing_data import validate_data, validate_is_audio_data, test_data, test_data2, \
     validata_take_command_data
-from app.utils.j_settings import Settings
-from app.global_code.helpful_functions import create_logger_error, log_it
+from utils.j_settings import Settings
+from global_code.helpful_functions import create_logger_error, log_it
 import os
-from app.utils.chatgpt_api.chatgpt_api_calls import call_gpt
+from utils.chatgpt_api.chatgpt_api_calls import call_gpt
 
 
 async def main_loop_api(settings: Settings):

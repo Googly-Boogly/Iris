@@ -6,23 +6,23 @@
 #  Requirements:
 #++++++++++++++++++++++++++++++++++++++++++++++++++++#
 
-from app.global_code.helpful_functions import create_logger_error, CustomError, log_it, log_exceptions, \
+from global_code.helpful_functions import create_logger_error, CustomError, log_it, log_exceptions, \
     benchmark_and_log_exceptions
-from app.commands.utilities.calendar_crud import create_google_calendar_event, edit_calendar_event,\
+from commands.utilities.calendar_crud import create_google_calendar_event, edit_calendar_event,\
     delete_google_calendar_event, read_events_for_day, read_event_with_event_id, read_events_for_week
-from app.commands.utilities.timer_module import create_timer
-from app.commands.utilities.translator import translate_to, translate_from, detect_language
-from app.commands.information.weather import get_current_weather_city, get_8day_forecast_city
-from app.commands.entertainment.restaurants import get_restaurants_in_area
-from app.commands.utilities.lights import switch_on_off, brightness_up, brightness_down, set_color,\
+from commands.utilities.timer_module import create_timer
+from commands.utilities.translator import translate_to, translate_from, detect_language
+from commands.information.weather import get_current_weather_city, get_8day_forecast_city
+from commands.entertainment.restaurants import get_restaurants_in_area
+from commands.utilities.lights import switch_on_off, brightness_up, brightness_down, set_color,\
     wyze_turn_on, wyze_turn_off
-from app.commands.utilities.tasks import create_task
-from app.commands.utilities.habits import Habits_class
-from app.commands.entertainment.music import select_and_play_album, select_and_play_artist, select_and_play_playlist,\
+from commands.utilities.tasks import create_task
+from commands.utilities.habits import Habits_class
+from commands.entertainment.music import select_and_play_album, select_and_play_artist, select_and_play_playlist,\
     select_and_play_song, skip_track, previous_track, shuffle_music, repeat_music
 import os
-from app.commands.entertainment.open_app import open_app
-from app.commands.communication.texting import send_text_message_with_phone_num, send_text_message_with_name
+from commands.entertainment.open_app import open_app
+from commands.communication.texting import send_text_message_with_phone_num, send_text_message_with_name
 
 
 def call_function(function_name: str, info: dict, global_variables: object) -> dict:

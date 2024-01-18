@@ -1,4 +1,4 @@
-from app.commands.utilities.classes_utilities import alarms
+from commands.utilities.classes_utilities import alarms
 from datetime import datetime, timedelta
 
 

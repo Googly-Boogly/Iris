@@ -28,7 +28,7 @@ Installation:
         ```bash
         docker build -t iris_image .
         ```
-        docker run -it --rm iris_image
+        docker-compose up
 
 
 

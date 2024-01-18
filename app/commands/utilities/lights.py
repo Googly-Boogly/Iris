@@ -1,6 +1,6 @@
 from wyze_sdk import Client
-from app.global_code import secrets
-from app.global_code.helpful_functions import create_logger_error, log_it, log_exceptions
+from global_code import secrets
+from global_code.helpful_functions import create_logger_error, log_it, log_exceptions
 import os
 
 

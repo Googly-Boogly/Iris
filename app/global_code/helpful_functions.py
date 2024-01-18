@@ -33,7 +33,7 @@ def log_exceptions(file_prefix: Optional[str] = None):
 
             personal_logger2 = PersonalLogger(file_path, file_name)
             py_logger_object: logging.Logger = personal_logger2.create_logger_error()
-            
+
             result: Optional[Any] = None
             try:
                 result = func(*args, **kwargs)
@@ -105,9 +105,9 @@ def benchmark_and_log_exceptions(file_prefix: Optional[str] = None):
 
             personal_logger_object = PersonalLogger(file_path, file_name)
             logger2: logging.logger = personal_logger_object.create_logger_error()
-            
+
             result: Optional[Any] = None
-            
+
             start_time = time.time()
             try:
                 result = func(*args, **kwargs)
@@ -254,15 +254,20 @@ class CustomError(Exception):
 
 # this class will give us an instance of a connection to our database
 class MySQLConnection:
-    def __init__(self, db):
-        connection = pymysql.connect(host='localhost',
-                                     port=8889,
-                                     user=os.getenv("MYSQL_USER"),
-                                     password=os.getenv("MYSQL_PASSWORD"),
-                                     db=db,
-                                     charset='utf8mb4',
-                                     cursorclass=pymysql.cursors.DictCursor,
-                                     autocommit=True)
+    def __init__(self, db, host: Optional[str] = None, port: Optional[str] = None
+                 , user: Optional[str] = None, password: Optional[str] = None):
+        print('GFDSGDFGDFGFD')
+        print(os.getenv("MYSQL_HOST"))
+        connection = pymysql.connect(
+            host=host or os.getenv("MYSQL_HOST"),
+            port=int(port or os.getenv("MYSQL_PORT")),
+            user=user or os.getenv("MYSQL_USER"),
+            password=password or os.getenv("MYSQL_PASSWORD"),
+            db=db,
+            charset='utf8mb4',
+            cursorclass=pymysql.cursors.DictCursor,
+            autocommit=True
+        )
         self.connection = connection
 
     # the method to query the database
@@ -387,7 +392,7 @@ def log_it(logger: logging.Logger, error: Exception) -> Exception:
     return error
 
 
-def create_logger_simple(file_name: str, name: str) -> logging.logger:
+def create_logger_simple(file_name: str, name: str) -> logging.Logger:
     # ---------------------------------------------------------------------------
     # Older version of the logger maker
     # is broken

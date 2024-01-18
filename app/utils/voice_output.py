@@ -1,8 +1,9 @@
 import pyttsx3
-import sounddevice as sd
-from app.global_code.helpful_functions import create_logger_error, log_it, benchmark_and_log_exceptions
-from app.utils.j_settings import Settings
+# import sounddevice as sd
+from global_code.helpful_functions import create_logger_error, log_it, benchmark_and_log_exceptions
+from utils.j_settings import Settings
 from typing import Optional
+
 
 def get_output_device_index(device_name: Optional[str]) -> int or None:
     devices = sd.query_devices()

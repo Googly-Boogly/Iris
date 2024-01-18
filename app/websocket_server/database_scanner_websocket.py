@@ -2,13 +2,13 @@
 
 from datetime import datetime, timedelta
 import time
-from app.database_scanner.alarm_checker import check_alarms
+from database_scanner.alarm_checker import check_alarms
 import os
-from app.global_code.helpful_functions import create_logger_error, log_it, log_exceptions
-from app.database_scanner.lights_checker import check_lights, do_lights
-from app.database_scanner.reminders_checker import check_reminders
-from app.utils.voice_output import speak
-from app.commands.utilities.habits import Habits_class
+from global_code.helpful_functions import create_logger_error, log_it, log_exceptions
+from database_scanner.lights_checker import check_lights, do_lights
+from database_scanner.reminders_checker import check_reminders
+from utils.voice_output import speak
+from commands.utilities.habits import Habits_class
 import subprocess
 import asyncio
 # from commands.utilities.daily_todo import

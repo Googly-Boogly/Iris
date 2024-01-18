@@ -10,3 +10,4 @@ secrets.py
 .idea/
 sql_master_key.txt
 .env
+docker-compose.yml

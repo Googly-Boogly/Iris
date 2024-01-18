@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
-from app.commands.utilities.classes_utilities import lights
-from app.commands.utilities.lights import brightness_down, brightness_up, set_color, wyze_turn_on, wyze_turn_off
-from app.global_code.helpful_functions import log_exceptions, benchmark_function, benchmark_and_log_exceptions
+from commands.utilities.classes_utilities import lights
+from commands.utilities.lights import brightness_down, brightness_up, set_color, wyze_turn_on, wyze_turn_off
+from global_code.helpful_functions import log_exceptions, benchmark_function, benchmark_and_log_exceptions
 import os
 
 

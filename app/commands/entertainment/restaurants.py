@@ -3,9 +3,9 @@
 #****************************************************#
 
 
-from app.global_code.helpful_functions import create_logger_error, log_it, log_exceptions, benchmark_and_log_exceptions
+from global_code.helpful_functions import create_logger_error, log_it, log_exceptions, benchmark_and_log_exceptions
 import os
-from app.global_code.secrets import google_maps_api_key
+from global_code.secrets import google_maps_api_key
 
 
 # This function gets restaurants near the target latitude and longitude in a certain radius this function will return

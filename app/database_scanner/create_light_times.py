@@ -1,4 +1,4 @@
-from app.commands.utilities.classes_utilities import lights
+from commands.utilities.classes_utilities import lights
 from datetime import datetime
 
 

@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
-from app.commands.utilities.classes_utilities import alarms
-from app.global_code.helpful_functions import log_exceptions, benchmark_function, benchmark_and_log_exceptions
+from commands.utilities.classes_utilities import alarms
+from global_code.helpful_functions import log_exceptions, benchmark_function, benchmark_and_log_exceptions
 import os
 
 

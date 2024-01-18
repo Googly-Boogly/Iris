@@ -1,4 +1,4 @@
-from app.global_code.helpful_functions import connecttomysql, create_logger_error, log_it, log_exceptions
+from global_code.helpful_functions import connecttomysql, create_logger_error, log_it, log_exceptions
 import os
 
 

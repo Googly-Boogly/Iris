@@ -10,8 +10,8 @@
 # response is too long
 # This function will call openweathermap and grab all the data for the specified city, and return a dictonary of the information
 
-from app.global_code.helpful_functions import create_logger_error, log_it, log_exceptions
-from app.global_code.secrets import openweathermap_api_key
+from global_code.helpful_functions import create_logger_error, log_it, log_exceptions
+from global_code.secrets import openweathermap_api_key
 import requests
 import os
 

@@ -1,4 +1,4 @@
-from app.commands.utilities.classes_utilities import reminders
+from commands.utilities.classes_utilities import reminders
 from datetime import datetime
 
 

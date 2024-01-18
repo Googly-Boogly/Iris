@@ -1,3 +1,6 @@
+# Change to docker-compose.yml and change any variables to your local ones
+# Than run docker-compose up --build in the same directory as this file
+
 version: '3'
 
 services:
@@ -13,8 +16,8 @@ services:
     networks:
       - app-network
     volumes:
-      - F:\Coding\Iris\database\iris_db_mysql.sql:/docker-entrypoint-initdb.d/iris_db_mysql.sql # Change this to your
-      # local path
+      - path/to/db/script:/docker-entrypoint-initdb.d/iris_db_mysql.sql # Change this to your
+      # local path and the script file
       # This is the database file that will be used to create the database
       - db:/var/lib/mysql
 
@@ -25,8 +28,8 @@ services:
     depends_on:
       - mysql
     environment:
-      PORT: 7890
-      IP_ADDR: 192.168.50.11
+      PORT: changeme # Change
+      IP_ADDR: changeme # Local ip of the host machine (if running another websocket server)
       MYSQL_HOST: mysql
       MYSQL_PORT: 3306
       MYSQL_USER: root
@@ -35,7 +38,7 @@ services:
     networks:
       - app-network
     volumes:
-      - F:\Coding\Iris\app:/app # Change this to your local path
+      - local/path/to/code:/app # Change this to your local path
 
 networks:
   app-network:
