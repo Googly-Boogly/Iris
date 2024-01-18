@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  websocket-server:
+    image: iris_image
+    ports:
+      - "7891:7891"
+    volumes:
+      - F:\Coding\Iris\app:/app

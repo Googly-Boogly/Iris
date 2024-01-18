@@ -7,13 +7,15 @@ class Settings:
     """
     Singleton Class:
     This class will hold the settings for the user
+    Will act as the apps state
     """
     def __init__(self, current_latitude: float, current_longitude: float, current_city: str,
                  current_state: str, current_country: str, current_zipcode: int,
                  current_timezone: str, user: User, directory_for_mp3: Optional[str] = None,
                  username_async_thread_decrypted: Optional[str] = None,
                  password_async_thread_decrypted: Optional[str] = None, username_api_decrypted: Optional[str] = None,
-                 password_api_decrypted: Optional[str] = None, websocket_url: Optional[str] = None):
+                 password_api_decrypted: Optional[str] = None, websocket_url: Optional[str] = None,
+                 ip: Optional[str] = None, port: Optional[str] = None):
         """
         All settings for the user
         :param current_latitude: current latitude of the user
@@ -39,7 +41,8 @@ class Settings:
         self.current_zipcode = current_zipcode
         self.current_timezone = current_timezone
         self.user = user
-
+        self.ip = ip if ip else os.getenv('IP')
+        self.port = port if port else os.getenv('PORT')
         self.directory_for_mp3 = directory_for_mp3 if directory_for_mp3 \
             else os.path.dirname(__file__) + '/mp3_file_download/'
 
@@ -51,7 +54,14 @@ class Settings:
             else 'ASYNC_IS_GR8_567%'
         self.username_api_decrypted = username_api_decrypted if username_api_decrypted else 'api_server'
         self.password_api_decrypted = password_api_decrypted if password_api_decrypted else 'API_SERVER_PASSWORD123#'
-        self.websocket_url = websocket_url if websocket_url else 'ws://localhost:7890'
+        self.websocket_url = websocket_url if websocket_url else f'ws://{self.ip}:{self.port}'
+
+    def update_details(self):
+        """
+        This will update the current details of the user with the database)
+        :return: None
+        """
+
 
 def get_current_details_test():
     user = User(

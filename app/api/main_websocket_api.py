@@ -31,7 +31,6 @@ async def main_loop_api(settings: Settings):
         logger.info("Connection closed")
 
 
-
 async def authenticate_api(websocket, settings: Settings) -> bool:
     """
     Authenticates the user

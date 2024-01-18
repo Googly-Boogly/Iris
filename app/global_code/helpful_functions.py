@@ -1,48 +1,55 @@
+"""
+This is a universal Page to be used across projects
+"""
 import logging
-import pymysql.cursors
 import os
 import traceback
 import inspect
 import time
-# This will be a universal page, for use across multiple projects
+from typing import Optional, Callable, Any
+# Optional Imports:
+# These 3 for the database connection
+import pymysql.cursors
+from dotenv import load_dotenv
+load_dotenv()
 
 
-def log_exceptions(file_prefix: str or None = None):
+def log_exceptions(file_prefix: Optional[str] = None):
     """
-        Wraps code in try Except and logs it.
-        Lets through custom errors (same file) and lets them continue up the stack
+        Logs and exceptions that occur in the function
         To use:
         from helpful_functions import log_exceptions
         @log_exceptions
         def some_function(*args, *kwargs):
     """
-    def decorator(func):
+    def decorator(func: Callable):
         def wrapper(*args, **kwargs):
             calling_frame = inspect.stack()[1]
-            file_path = calling_frame[1]
-            file_name = func.__name__
+            file_path: str = calling_frame[1]
+            file_name: str = func.__name__
 
             if file_prefix is not None:
                 file_name = file_prefix + file_name
 
             personal_logger2 = PersonalLogger(file_path, file_name)
             py_logger_object: logging.Logger = personal_logger2.create_logger_error()
-
+            
+            result: Optional[Any] = None
             try:
                 result = func(*args, **kwargs)
             except CustomError as custom_error:
                 personal_logger2.log_it(custom_error)
-                raise
+                raise custom_error
             except Exception as e:
                 personal_logger2.log_it(e)
+                raise e
             finally:
                 return result
-
         return wrapper
     return decorator
 
 
-def benchmark_function(file_prefix: str or None = None):
+def benchmark_function(file_prefix: Optional[str] = None):
     """
     Benchmarks your function, and creates a benchmark log file
     :param file_prefix: if you want to add a suffix to the function name
@@ -52,10 +59,10 @@ def benchmark_function(file_prefix: str or None = None):
         @benchmark_logs
         def some_function(**args, **kwargs):
     """
-    def decorator(func):
+    def decorator(func: Callable):
         def wrapper(*args, **kwargs):
             calling_frame = inspect.stack()[1]
-            file_path = calling_frame[1]
+            file_path: str = calling_frame[1]
             file_name: str = func.__name__
 
             if file_prefix is not None:
@@ -65,7 +72,7 @@ def benchmark_function(file_prefix: str or None = None):
             bm_logger: logging.Logger = personal_logger2.create_benchmark()
             start_time = time.time()
 
-            result = func(*args, **kwargs)
+            result: Any = func(*args, **kwargs)
 
             end_time_section1 = time.time()
             time_section1 = end_time_section1 - start_time
@@ -77,29 +84,30 @@ def benchmark_function(file_prefix: str or None = None):
     return decorator
 
 
-def benchmark_and_log_exceptions(file_prefix: str or None = None):
+def benchmark_and_log_exceptions(file_prefix: Optional[str] = None):
     """
         Benchmarks your function
         To use: from helpful_functions import benchmark_logs
         @benchmark_logs
         def some_function(**args, **kwargs):
     """
-    def decorator(func):
+    def decorator(func: Callable):
         def wrapper(*args, **kwargs):
             calling_frame = inspect.stack()[1]
-            file_path = calling_frame[1]
-            file_name = func.__name__
-            checker = False
+            file_path: str = calling_frame[1]
+            file_name: str = func.__name__
 
             if file_prefix is not None:
                 file_name = file_prefix + file_name
 
             personal_logger2 = PersonalLogger(file_path, file_name)
-            bm_logger = personal_logger2.create_benchmark()
+            bm_logger: logging.logger = personal_logger2.create_benchmark()
 
             personal_logger_object = PersonalLogger(file_path, file_name)
-            logger2 = personal_logger_object.create_logger_error()
-
+            logger2: logging.logger = personal_logger_object.create_logger_error()
+            
+            result: Optional[Any] = None
+            
             start_time = time.time()
             try:
                 result = func(*args, **kwargs)
@@ -108,13 +116,11 @@ def benchmark_and_log_exceptions(file_prefix: str or None = None):
                 raise
             except Exception as e:
                 personal_logger2.log_it(e)
-                checker = True
             finally:
                 end_time_section1 = time.time()
                 time_section1 = end_time_section1 - start_time
                 bm_logger.debug(f"{file_name} took {time_section1} seconds")
-                if not checker:
-                    return result
+                return result
         return wrapper
     return decorator
 
@@ -249,20 +255,18 @@ class CustomError(Exception):
 # this class will give us an instance of a connection to our database
 class MySQLConnection:
     def __init__(self, db):
-        # change the user and password as needed
         connection = pymysql.connect(host='localhost',
                                      port=8889,
-                                     user='root',
-                                     password='root',
+                                     user=os.getenv("MYSQL_USER"),
+                                     password=os.getenv("MYSQL_PASSWORD"),
                                      db=db,
                                      charset='utf8mb4',
                                      cursorclass=pymysql.cursors.DictCursor,
                                      autocommit=True)
-        # establish the connection to the database
         self.connection = connection
 
     # the method to query the database
-    def query_db(self, query, data=None):
+    def query_db(self, query, data=None) -> int or tuple or bool:
         with self.connection.cursor() as cursor:
             try:
                 query = cursor.mogrify(query, data)
@@ -281,11 +285,9 @@ class MySQLConnection:
                     # UPDATE and DELETE queries will return nothing
                     self.connection.commit()
             except Exception as e:
-                # if the query fails the method will return FALSE
                 print(e)
                 return False
             finally:
-                # close the connection
                 self.connection.close()
             # connectToMySQL receives the database we're using and uses it to create an instance of MySQLConnection
 
@@ -297,6 +299,7 @@ def connecttomysql(db):
 def count_lines_of_code(directory: str) -> int:
     """
     Needs to be the absolute path of the directory also will exclude the venv folder
+    only counts .py files
     :param directory: Absolute path of the directory
     :return: Total_lines of python in project
     """
@@ -319,7 +322,7 @@ def count_lines_of_code(directory: str) -> int:
 
 def create_logger_error(file_path: str, name_of_log_file: str, log_to_console: bool = False) -> logging.Logger:
     """
-    creates a logger object 
+    creates a logger object
     when you call EX: logger.debug() will create a log in the same folder the calling function is. and create a log file
     this log file will be named whatever you want
     WARNING This function seems to only work using a synchronous function.
@@ -329,7 +332,7 @@ def create_logger_error(file_path: str, name_of_log_file: str, log_to_console: b
     :param file_path: (str) absolute path of the file, this code: os.path.abspath(__file__)
     :param name_of_log_file: (str) name of function
     :return: the python logger object
-    To use the logger
+    To use the logger:
     from helpful_functions import create_logger_error, log_it
     logger = create_logger_error(os.path.abspath(__file__), '')
     try:
@@ -361,7 +364,7 @@ def create_logger_error(file_path: str, name_of_log_file: str, log_to_console: b
     console_handler = logging.StreamHandler()
     console_handler.setFormatter(formatter)
 
-    # Set the logging level to capture all levels (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+    # levels (DEBUG, INFO, WARNING, ERROR, CRITICAL)
     logger.setLevel(logging.DEBUG)
 
     # The handler is what will write to the log file
@@ -383,22 +386,24 @@ def log_it(logger: logging.Logger, error: Exception) -> Exception:
     logger.error(log_message)
     return error
 
-# def create_logger_all(file_name, name):
-#     # ---------------------------------------------------------------------------
-#     # Older version of the logger maker
-#     # ---------------------------------------------------------------------------
-#
-#     logger = logging.getLogger(name)
-#
-#     caller_dir = os.path.dirname(os.path.abspath(file_name))
-#     logs_dir = os.path.join(caller_dir, "../utils/logs")
-#     os.makedirs(logs_dir, exist_ok=True)  # Create the "logs" folder if it doesn't exist
-#
-#     log_file = os.path.join(logs_dir, f"{name}.log")
-#     handler = logging.FileHandler(log_file)
-#     formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-#     handler.setFormatter(formatter)
-#
-#     logger.addHandler(handler)
-#     logger.setLevel(logging.DEBUG)
-#     return logger
+
+def create_logger_simple(file_name: str, name: str) -> logging.logger:
+    # ---------------------------------------------------------------------------
+    # Older version of the logger maker
+    # is broken
+    # ---------------------------------------------------------------------------
+
+    logger = logging.getLogger(name)
+
+    caller_dir = os.path.dirname(os.path.abspath(file_name)) # this line is probably broken
+    logs_dir = os.path.join(caller_dir, "../utils/logs")
+    os.makedirs(logs_dir, exist_ok=True)  # Create the "logs" folder if it doesn't exist
+
+    log_file = os.path.join(logs_dir, f"{name}.log")
+    handler = logging.FileHandler(log_file)
+    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+    handler.setFormatter(formatter)
+
+    logger.addHandler(handler)
+    logger.setLevel(logging.DEBUG)
+    return logger
