@@ -1,34 +1,76 @@
+Jarvis: Your Personal AI Assistant
 
-Websocket server for a virtual assistant
-launches two threads: A websocket api thread, and a thread to send the queue to other programs
+Jarvis is a voice-controlled AI assistant designed to help you manage your day-to-day tasks, provide information, and control your smart home devices.
+Features
 
-To Do
+    Calendar Management: Create, edit, and delete calendar events using natural language commands.
 
-Installation:
-    Python 3.9
-    create a venv with this command:
-    ```bash
-    python3 -m venv venv
-    ```
-    activate the venv with this command:
-    ```bash
-    source venv/bin/activate
-    ```
-    install the requirements with this command:
-    ```bash
-    pip install -r requirements.txt
-    ```
-    run the server with this command:
-    ```bash
-    python3 main.py
-    ```
-        Or
-            Install Docker
-    navigate to base dir of the project run
-        ```bash
-        docker build -t iris_image .
-        ```
-        docker-compose up
+    Task Management: Create and manage tasks with due dates and priorities.
 
+    Habit Tracking: Set up habits and track your progress towards achieving them.
 
+    Information Retrieval: Get weather forecasts, restaurant recommendations, and other information through voice queries.
 
+    Smart Home Control: Control your Wyze smart lights and other compatible devices.
+
+    Communication: Send text messages to contacts using voice commands.
+
+    Translation: Translate text to and from different languages.
+
+    Music Control: Play, pause, skip, and shuffle music from your preferred music service.
+
+    Open Apps: Open applications on your device using voice commands.
+
+Technologies Used
+
+    Speech Recognition (Whisper, DeepSpeech)
+
+    Natural Language Processing (OpenAI ChatGPT API)
+
+    Google Calendar API
+
+    Google Maps API
+
+    Wyze API
+
+    Python
+
+Installation and Setup
+
+    Clone the repository: git clone https://github.com/your-username/Jarvis.git
+
+    Install the required dependencies: pip install -r requirements.txt
+
+    Set up your API keys and other sensitive information in the secrets.py file.
+
+    Configure your default microphone and speaker settings.
+
+Usage
+
+    Run the main.py script to start Jarvis.
+
+    Speak your commands or questions clearly into the microphone.
+
+    Jarvis will respond with relevant information or perform the requested actions.
+
+Examples
+
+    "Create a meeting with John tomorrow at 10 AM."
+
+    "What's the weather like in New York City?"
+
+    "Turn on the living room lights."
+
+    "Play my workout playlist."
+
+    "Translate 'Hello, how are you?' to Spanish."
+
+Disclaimer
+
+This project is still under development and may contain bugs or limitations.
+Contributing
+
+Contributions are welcome! Please see the CONTRIBUTING.md file for guidelines.
+License
+
+This project is licensed under the MIT License.
